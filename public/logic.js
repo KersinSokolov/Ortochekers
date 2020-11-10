@@ -1,6 +1,7 @@
 var ws = new WebSocket('ws://'+window.location.hostname+':3001');
+var tableId = document.querySelector('table').getAttribute('data-id');
 ws.addEventListener('open', function(){
-    ws.send(JSON.stringify({type:"ready"}));
+    ws.send(JSON.stringify({type:"ready", id:tableId}));
 });
 
 ws.onmessage = function(event){

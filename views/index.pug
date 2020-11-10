@@ -4,5 +4,5 @@ html
         link(rel='stylesheet' type="text/css" href='style.css')
     body
         each key in games
-            a(href='/game/'+key) #{key}
-        a(href='/game/0') New Game
+            a(href='/game?id='+key) #{key}
+        a(href='/new') New Game
