@@ -29,7 +29,7 @@ app.get('/new', (req, res) => {
         game: new Game(),
         player1Ws: undefined,
         player2Ws: undefined,
-        spectacorsWs: []
+        spectatorsWs: []
     };
     res.redirect('/game?id='+id);
 });  
@@ -41,6 +41,15 @@ serverWS.on('connection', ws => {
     ws.on('message', data => {
         try {
             message = JSON.parse(data);
+
+            function broadcastData(data){
+                const broadcastingData = JSON.stringify(data)
+                ws._gameLink.player1Ws.send(broadcastingData);
+                ws._gameLink.player2Ws.send(broadcastingData);
+                ws._gameLink.spectatorsWs.forEach(w =>{
+                    w.send(broadcastingData);
+                })
+            }
 
             function sendState(ws) {
                 let state = ws._gameLink.game.getState();
@@ -67,7 +76,7 @@ serverWS.on('connection', ws => {
                     if (!gm.player2Ws) {
                         gm.player2Ws = ws;
                     } else {
-                        gm.spectacorsWs.push(ws);
+                        gm.spectatorsWs.push(ws);
                     }
                 }
                 sendState(ws);
@@ -76,7 +85,21 @@ serverWS.on('connection', ws => {
                 ws._gameLink.game.makeTurn(message.data);
                 sendState(ws._gameLink.player1Ws);
                 sendState(ws._gameLink.player2Ws);
-                ws._gameLink.spectacorsWs.forEach(sendState);
+                ws._gameLink.spectatorsWs.forEach(sendState);
+            }
+            if (message.type === 'message'){
+                let text = message.text;
+                if (ws === ws._gameLink.player1Ws){
+                    text = '(Player 1): ' + text;
+                }else if (ws === ws._gameLink.player2Ws){
+                    text = '(Player 2): ' + text;
+                }else{
+                    text = '(Spectator): ' + text;
+                }
+                broadcastData({
+                    type: 'message',
+                    text: text
+                });
             }
         } catch (e) {
             //todo handling

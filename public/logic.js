@@ -1,13 +1,30 @@
 var ws = new WebSocket('ws://'+window.location.hostname+':3001');
-var tableId = document.querySelector('table').getAttribute('data-id');
+var tableId = document.getElementById('desk').getAttribute('data-id');
+var tebleFigures = document.getElementById('statusfigures');
+var chat = document.getElementById('chat');
+var messageInput = document.getElementById('message');
+
 ws.addEventListener('open', function(){
     ws.send(JSON.stringify({type:"ready", id:tableId}));
+    window.addEventListener('keypress', function(event){
+        debugger
+        if (event.key === "Enter"){
+            if (messageInput.value){
+                ws.send(JSON.stringify({type:"message", text:messageInput.value}));
+                messageInput.value = '';
+            }
+        }
+        
+    });
 });
 
 ws.onmessage = function(event){
     var data = JSON.parse(event.data);
     if (data.type === "desk"){
         clearingBeforeTurn(data);
+    }
+    if (data.type === 'message'){
+        chat.innerHTML += '<div>'+data.text+ '</div>';
     }
 }
 
@@ -46,13 +63,24 @@ function initialGenerateTable() {
 
 function renderDesk(desk, actions) {
     currentAvailableActions = actions;
+    var figures = [0,0,0,0,0,0,0];
     for (let i = 0; i < desk.length; i++) {
         for (let j = 0; j < desk.length; j++) {
             document.getElementById('' + i + j).setAttribute('data-val', desk[i][j]);
+            figures[desk[i][j]]++;
         }
     }
     for (let action of actions) {
         document.getElementById('' + action.x + action.y).classList.add(isModeSelectionOfFigure?'highlighted':'highlighted-w');
+    }
+    for (var i=1; i<figures.length; i++){
+        var selector = '#statusfigures ' ;
+        if  (i<4){
+            selector +='.white td:nth-child('+i+')';
+        } else{
+            selector +='.black td:nth-child('+(i-3)+')';
+        }
+        document.querySelector(selector).innerHTML = figures[i];
     }
 }
 
