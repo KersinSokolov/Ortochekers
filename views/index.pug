@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+html
+    head
+        link(rel='stylesheet' type="text/css" href='style.css')
+    body
+        each key in games
+            a(href='/game?id='+key) #{key}
+        a(href='/new') New Game

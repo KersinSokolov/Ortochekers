@@ -1,0 +1,116 @@
+td{
+    width:100px;
+    height:100px;
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    background-color: #bebebe;
+}
+.white td:nth-child(1){
+    background-image: url('imgs/2.png');
+}
+.white td:nth-child(2){
+    background-image: url('imgs/1.png');
+}
+.white td:nth-child(3){
+    background-image: url('imgs/3.png');
+}
+
+.black td:nth-child(1){
+    background-image: url('imgs/5.png');
+}
+.black td:nth-child(2){
+    background-image: url('imgs/4.png');
+}
+.black td:nth-child(3){
+    background-image: url('imgs/6.png');
+}
+#statusfigures {
+    position: fixed;
+    right: 0;
+    top:0;
+}
+#statusfigures td{
+    width: 40px;
+    height: 40px;
+    background-position: 0;
+    background-size: 40px 40px;
+    color: #8880ff;
+    font-size: 30px;
+    text-align: right;
+    font-weight: bold;
+}
+
+td[data-val='1']{
+    background-image: url('imgs/2.png');
+}
+td[data-val='2']{
+    background-image: url('imgs/1.png');
+}
+td[data-val='3']{
+    background-image: url('imgs/3.png');
+}
+
+td[data-val='4']{
+    background-image: url('imgs/5.png');
+}
+td[data-val='5']{
+    background-image: url('imgs/4.png');
+}
+td[data-val='6']{
+    background-image: url('imgs/6.png');
+}
+
+td[data-val='-1']{
+    background-image: url('imgs/2.png');
+    opacity: 0.2;
+}
+td[data-val='-2']{
+    background-image: url('imgs/1.png');
+    opacity: 0.2;
+}
+td[data-val='-3']{
+    background-image: url('imgs/3.png');
+    opacity: 0.2;
+}
+
+td[data-val='-4']{
+    background-image: url('imgs/5.png');
+    opacity: 0.2;
+}
+td[data-val='-5']{
+    background-image: url('imgs/4.png');
+    opacity: 0.2;
+}
+td[data-val='-6']{
+    background-image: url('imgs/6.png');
+    opacity: 0.2;
+}
+.highlighted{
+    box-shadow: 0 0 30px #ff0000 inset;
+}
+.highlighted-w{
+    box-shadow: 0 0 30px #00ff00 inset;
+}
+table{
+    margin: 0 auto;
+}
+
+a{
+    width: 200px;
+    height: 100px;
+    display: inline-block;
+    line-height: 100px;
+    text-align: center;
+    background: #bebebe;
+    cursor: pointer;
+    margin: 20px;
+    font-size: 20px;
+    text-decoration: none;
+    color: #fff;
+}
+#textchat{
+    position: fixed;
+    top:0;
+    left:0;
+    color: #fff;
+}

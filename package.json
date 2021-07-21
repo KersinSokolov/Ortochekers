@@ -1,0 +1,29 @@
+{
+  "name": "ortocheckers",
+  "version": "0.0.1",
+  "description": "modified checkers",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KersinSokolov/Ortochekers.git"
+  },
+  "keywords": [
+    "checkers",
+    "chess",
+    "board-game"
+  ],
+  "author": "Alexander Sokolov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KersinSokolov/Ortochekers/issues"
+  },
+  "homepage": "https://github.com/KersinSokolov/Ortochekers#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.4",
+    "ws": "^7.2.0"
+  }
+}
